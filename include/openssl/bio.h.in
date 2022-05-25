@@ -172,14 +172,23 @@ extern "C" {
 # define BIO_CTRL_SET_INDENT                    80
 # define BIO_CTRL_GET_INDENT                    81
 
+/*
+ * internal BIO:
+ * # define BIO_CTRL_SET_KTLS_TX_ZEROCOPY_SENDFILE 82
+ * # define BIO_CTRL_GET_KTLS_TX_ZEROCOPY_SENDFILE 83
+ */
+
 # ifndef OPENSSL_NO_KTLS
 #  define BIO_get_ktls_send(b)         \
      (BIO_ctrl(b, BIO_CTRL_GET_KTLS_SEND, 0, NULL) > 0)
 #  define BIO_get_ktls_recv(b)         \
      (BIO_ctrl(b, BIO_CTRL_GET_KTLS_RECV, 0, NULL) > 0)
+#  define BIO_get_ktls_zerocopy_sendfile(b) \
+     (BIO_ctrl(b, BIO_CTRL_GET_KTLS_TX_ZEROCOPY_SENDFILE, 0, NULL) > 0)
 # else
 #  define BIO_get_ktls_send(b)  (0)
 #  define BIO_get_ktls_recv(b)  (0)
+#  define BIO_get_ktls_zerocopy_sendfile(b) (0)
 # endif
 
 /* modifiers */

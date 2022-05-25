@@ -600,6 +600,13 @@ static long conn_ctrl(BIO *b, int cmd, long num, void *ptr)
         BIO_clear_ktls_ctrl_msg_flag(b);
         ret = 0;
         break;
+    case BIO_CTRL_SET_KTLS_TX_ZEROCOPY_SENDFILE:
+        ret = ktls_enable_tx_zerocopy_sendfile(b->num);
+        if (ret)
+            BIO_set_ktls_zerocopy_sendfile_flag(b);
+        break;
+    case BIO_CTRL_GET_KTLS_TX_ZEROCOPY_SENDFILE:
+        return BIO_should_ktls_zerocopy_sendfile_flag(b) != 0;
 # endif
     default:
         ret = 0;

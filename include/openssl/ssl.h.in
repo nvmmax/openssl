@@ -410,6 +410,8 @@ typedef int (*SSL_async_callback_fn)(SSL *s, void *arg);
      * interoperability with CryptoPro CSP 3.x
      */
 # define SSL_OP_CRYPTOPRO_TLSEXT_BUG                     SSL_OP_BIT(31)
+    /* Disable kTLS TX zerocopy on Linux */
+# define SSL_OP_DISABLE_KTLS_TX_ZEROCOPY_SENDFILE        SSL_OP_BIT(32)
 
 /*
  * Option "collections."

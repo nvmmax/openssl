@@ -535,6 +535,13 @@ B<SSL_OP_ENABLE_KTLS>.
 B<StrictCertCheck>: Enable strict certificate checking. Equivalent to
 setting B<SSL_CERT_FLAG_TLS_STRICT> with SSL_CTX_set_cert_flags().
 
+B<KTLSTxNoZerocopySendfile>: disable the zerocopy TX mode of sendfile() on
+Linux. This mode is enabled by default on supported kernels and gives a
+performance boost when used with kTLS device offload. Note that invalid TLS
+records might be transmitted if the file is modified while being sent, so this
+option can be used to disable zerocopy. This option has no effect if B<KTLS> is
+not enabled. Equivalient to B<SSL_OP_DISABLE_KTLS_TX_ZEROCOPY_SENDFILE>.
+
 =item B<VerifyMode>
 
 The B<value> argument is a comma separated list of flags to set.

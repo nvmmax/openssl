@@ -781,6 +781,14 @@ instead of BIO_write() to send the HTTP response requested by a client.
 This option is only valid when B<-ktls> along with B<-WWW> or B<-HTTP>
 are specified.
 
+=item B<-no_zerocopy_sendfile>
+
+By default, SSL_sendfile() will use the zerocopy TX mode, which gives a
+performance boost when used with kTLS device offload. Note that invalid TLS
+records might be transmitted if the file is modified while being sent, so this
+option can be used to disable zerocopy. This option is only valid when
+B<-sendfile> is specified.
+
 =item B<-keylogfile> I<outfile>
 
 Appends TLS secrets to the specified keylog file such that external programs
